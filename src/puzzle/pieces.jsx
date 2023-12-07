@@ -106,6 +106,17 @@ class Piece {
     return shape
   }
 
+  // Method: Draw on Canvas
+  drawOnCanvas(ctx) {
+    const tileSize = 30
+    for (let x = 0; x < this.piece.length; x++) {
+      for (let y = 0; y < this.piece[x].length; y++) {
+        ctx.fillStyle = 'red'
+        if (this.piece[x][y] === 1) ctx.fillRect(y * tileSize, x * tileSize, tileSize, tileSize)
+      }
+    }
+  }
+
   // Method: Rotate Piece Forward
   rotatePieceForward() {
     this.currentRotation =(this._currentRotation + 1) % 4

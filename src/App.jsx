@@ -54,7 +54,6 @@ function App() {
       {/* <div ref={refContainer}></div> */}
 
       <Canvas
-        draw={draw}
         width='800'
         height='800' />
     </>

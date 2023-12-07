@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import { pieceT, pieceU } from "../puzzle/pieces"
 
 const useCanvas = draw => {
   const canvasRef = useRef()
@@ -9,7 +10,12 @@ const useCanvas = draw => {
     let count = 0
     let animationId
 
-    draw(ctx, count)
+    pieceT.drawOnCanvas(ctx)
+    pieceU.drawOnCanvas(ctx)
+    ctx.moveTo(100, 100)
+
+
+    // draw(ctx, count)
 
 
     // const renderer = () => {
@@ -21,7 +27,7 @@ const useCanvas = draw => {
     // renderer()
 
     // return () => window.cancelAnimationFrame(animationId)
-  }, [draw])
+  }, [])
 
   return canvasRef
 }
