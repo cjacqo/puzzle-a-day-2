@@ -34,6 +34,90 @@ const pieces = [
   ]
 ]
 
+class Piece {
+  constructor(piecesArr) {
+    this.pieces = piecesArr
+    this._currentFlip = 0
+    this._currentRotation = 0
+    
+    this._piece = this.drawPiece()
+  }
+
+  // Setters
+  set currentFlip(f) {
+    if (f > 1 || f < 0) this._currentFlip = 0
+    else this._currentFlip = f
+    this.drawPiece()
+  }
+
+  set currentRotation(r) {
+    this._currentRotation = r
+    this.drawPiece()
+  }
+
+  set currentPiece(pieceArr) {
+    this._piece = pieceArr
+  }
+
+  // Getters
+  get piece() {
+    return this._piece
+  }
+
+  // Method: Draw hexadecimal into an array
+  drawPiece() {
+    const arr = []
+    for (let y = 0; y < 4; y++) {
+      const innerArr = []
+      for (let x = 0; x < 4; x++) {
+        if (this.pieces[this._currentFlip][this._currentRotation] & (0x8000 >> (y * 4 + x))) {
+          innerArr.push(1)
+        } else {
+          innerArr.push(0)
+        }
+      }
+      arr.push(innerArr)
+    }
+    return arr
+  }
+
+  // Method: Rotate Piece Forward
+  rotatePieceForward() {
+    this.currentRotation =(this._currentRotation + 1) % 4
+    this.currentPiece = this.drawPiece()
+  }
+
+  // Method: Rotate Piece Backward
+  rotatePieceBackward() {
+    this.currentRotation = this._currentRotation - 1
+    if (this._currentRotation < 0) this._currentRotation = 3
+    this.currentPiece = this.drawPiece()
+  }
+
+  // Method: Flip Piece
+  flipPiece() {
+    this.currentFlip = (this._currentFlip + 1) % 2
+    this.currentPiece = this.drawPiece()
+  }
+}
+
+// Instantiate Pieces
+const pieceT = new Piece(pieces[0])
+const pieceZ = new Piece(pieces[1])
+const pieceU = new Piece(pieces[2])
+const pieceCorner = new Piece(pieces[3])
+const pieceL = new Piece(pieces[4])
+const pieceS = new Piece(pieces[5])
+const pieceB = new Piece(pieces[6])
+const pieceRectangle = new Piece(pieces[7])
+
 export {
-  pieces
+  pieceT,
+  pieceZ,
+  pieceU,
+  pieceCorner,
+  pieceL,
+  pieceS,
+  pieceB,
+  pieceRectangle
 }

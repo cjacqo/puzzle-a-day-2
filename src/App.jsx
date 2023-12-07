@@ -1,10 +1,13 @@
 import './App.css'
-import { drawTetromino } from './helpers/Helpers'
+import { pieceT, pieceZ, pieceU, pieceCorner, pieceL, pieceS, pieceB, pieceRectangle } from './puzzle/pieces'
 
 function App() {
 
-  const test = drawTetromino(5, 1, 1)
-  console.log(test)
+  console.log(pieceT.piece)
+
+  pieceT.rotatePieceForward()
+
+  console.log(pieceT.piece)
   
   return (
     <>
