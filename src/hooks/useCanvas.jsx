@@ -19,7 +19,7 @@ const useCanvas = draw => {
     pieceB.drawOnCanvas(ctx, 1, 570)
     pieceRectangle.drawOnCanvas(ctx, 1, 670)
 
-    // draw(ctx, count)
+    // draw(ctx, count)    
 
 
     // const renderer = () => {
@@ -32,7 +32,7 @@ const useCanvas = draw => {
 
     // return () => window.cancelAnimationFrame(animationId)
   }, [])
-
+  
   return canvasRef
 }
 
