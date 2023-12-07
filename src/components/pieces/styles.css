@@ -10,6 +10,17 @@
   top: 0;
 }
 
+.piece.selected {
+  border: 1px solid black;
+}
+
+.controls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 #t {
   left: 0;
 }

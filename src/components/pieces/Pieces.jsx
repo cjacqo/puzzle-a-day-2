@@ -1,16 +1,24 @@
-import { useEffect, useRef } from "react"
-import { pieceB, pieceCorner, pieceL, pieceRectangle, pieceS, pieceT, pieceU, pieceZ } from "../../puzzle/pieces"
+import PropTypes from 'prop-types'
+import { useEffect, useRef, useState } from "react"
+import { tetrominoeB, tetrominoeC, tetrominoeL, tetrominoeO, tetrominoeS, tetrominoeT, tetrominoeU, tetrominoeZ } from '../../puzzle/pieces'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotateRight, faRotateLeft, faRepeat } from '@fortawesome/free-solid-svg-icons'
 import './styles.css'
 
-const Piece = (pieceObj) => {
-  const { piece } = pieceObj
-  const size = '20px'
+const Piece = ({ piece, handleClick, selectedPiece }) => {
+  const size = '50px'
 
   const pieceRef = useRef()
+
+  const [currentPiece, setCurrentPiece] = useState(piece.shape)
+
+  const isSelected = selectedPiece === piece.id
 
   useEffect(() => {
     dragElement(pieceRef.current)
   }, [])
+
+
 
   function dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
@@ -51,10 +59,29 @@ const Piece = (pieceObj) => {
     }
   }
 
+  const onClick = (e) => {
+    handleClick(e, piece.id)
+  }
+
+  const handleFlip = () => {
+    piece.flip()
+    setCurrentPiece(piece.shape)
+  }
+
+  const handleForwardRotation = () => {
+    piece.rotateForward()
+    setCurrentPiece(piece.shape)
+  }
+
+  const handleBackwardRotation = () => {
+    piece.rotateBackward()
+    setCurrentPiece(piece.shape)
+  }
+
   return (
-    <div className="piece" id={piece.id} ref={pieceRef}>
+    <div className={`piece ${isSelected && 'selected'}`} id={piece.id} ref={pieceRef} onClick={onClick}>
       {
-        piece.piece.map((r, x) => {
+        currentPiece.map((r, x) => {
           return (
             <div key={x} className='row'>
               {
@@ -85,22 +112,54 @@ const Piece = (pieceObj) => {
           )
         })
       }
+      {
+        isSelected && (
+          <div className="controls">
+            <FontAwesomeIcon icon={faRepeat} onClick={handleFlip} />
+            <FontAwesomeIcon icon={faRotateLeft} onClick={handleBackwardRotation} />
+            <FontAwesomeIcon icon={faRotateRight} onClick={handleForwardRotation} />
+          </div>
+        )
+      }
     </div>
   )
 }
 
+Piece.propTypes = {
+  piece: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  selectedPiece: PropTypes.any.isRequired
+}
+
 const Pieces = () => {
+  const [selectedPiece, setSelectedPiece] = useState(false)
+  
+  const handleClick = (e, id) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log(e.target.parentElement.parentElement)
+    setSelectedPiece(id)
+  }
+
+  window.addEventListener('click', (e) => {
+    e.preventDefault()
+    setSelectedPiece(false)
+  })
+
+  useEffect(() => {
+    console.log(selectedPiece)
+  }, [selectedPiece])
 
   return (
     <div className="pieces-container">
-      <Piece piece={pieceT} />
-      <Piece piece={pieceZ} />
-      <Piece piece={pieceU} />
-      <Piece piece={pieceCorner} />
-      <Piece piece={pieceL} />
-      <Piece piece={pieceS} />
-      <Piece piece={pieceB} />
-      <Piece piece={pieceRectangle} />
+      <Piece piece={tetrominoeT} handleClick={handleClick} selectedPiece={selectedPiece} />
+      {/* <Piece piece={tetrominoeZ} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeU} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeC} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeL} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeS} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeB} handleClick={handleClick} selectedPiece={selectedPiece} />
+      <Piece piece={tetrominoeO} handleClick={handleClick} selectedPiece={selectedPiece} /> */}
     </div>
   )
 }
