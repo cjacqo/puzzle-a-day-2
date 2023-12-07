@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { pieceT, pieceZ, pieceU, pieceCorner, pieceL, pieceS, pieceB, pieceRectangle } from './puzzle/pieces'
 
 function App() {
+  // Test note
   const refContainer = useRef(null)
 
   useEffect(() => {
