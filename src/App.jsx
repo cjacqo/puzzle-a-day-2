@@ -3,37 +3,9 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { pieceT, pieceZ, pieceU, pieceCorner, pieceL, pieceS, pieceB, pieceRectangle } from './puzzle/pieces'
 import Canvas from './components/canvas/Canvas'
+import Pieces from './components/pieces/Pieces'
 
 function App() {
-  // const refContainer = useRef(null)
-
-  // useEffect(() => {
-  //   const scene = new THREE.Scene()
-  //   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-  //   const renderer = new THREE.WebGLRenderer()
-  //   renderer.setSize(window.innerWidth, window.innerHeight)
-  //   refContainer.current && refContainer.current.appendChild(renderer.domElement)
-
-  //   pieceT.drawThree().forEach(c => {
-  //     c.forEach(_ => {
-  //       scene.add(_)
-  //     })
-  //   })
-
-  //   camera.position.z = 5
-  //   renderer.render(scene, camera)
-  // }, [])
-
-  // const draw = (ctx, count) => {
-  //   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-  //   ctx.fillStyle = 'green'
-  //   const delta = count % 800
-  //   ctx.fillRect(10 + delta, 10, 100, 100)
-  // }
-
-  console.log(pieceT.piece)
-
-
   const draw = (ctx) => {
     console.log(pieceT.piece)
     const tileSize = 30
@@ -53,9 +25,11 @@ function App() {
 
       {/* <div ref={refContainer}></div> */}
 
-      <Canvas
+      {/* <Canvas
         width='800'
-        height='800' />
+        height='800' /> */}
+
+      <Pieces />
     </>
   )
 }

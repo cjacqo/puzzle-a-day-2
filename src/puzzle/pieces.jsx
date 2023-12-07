@@ -37,12 +37,14 @@ const pieces = [
 ]
 
 class Piece {
-  constructor(piecesArr) {
+  constructor(piecesArr, color, id) {
     this.pieces = piecesArr
     this._currentFlip = 0
     this._currentRotation = 0
     
     this._piece = this.drawPiece()
+    this._color = color
+    this._id = id
   }
 
   // Setters
@@ -64,6 +66,14 @@ class Piece {
   // Getters
   get piece() {
     return this._piece
+  }
+
+  get color() {
+    return this._color
+  }
+
+  get id() {
+    return this._id
   }
 
   // Method: Draw hexadecimal into an array
@@ -145,14 +155,14 @@ class Piece {
 }
 
 // Instantiate Pieces
-const pieceT = new Piece(pieces[0])
-const pieceZ = new Piece(pieces[1])
-const pieceU = new Piece(pieces[2])
-const pieceCorner = new Piece(pieces[3])
-const pieceL = new Piece(pieces[4])
-const pieceS = new Piece(pieces[5])
-const pieceB = new Piece(pieces[6])
-const pieceRectangle = new Piece(pieces[7])
+const pieceT = new Piece(pieces[0], 'red', 't')
+const pieceZ = new Piece(pieces[1], 'blue', 'z')
+const pieceU = new Piece(pieces[2], 'green', 'u')
+const pieceCorner = new Piece(pieces[3], 'orange', 'corner')
+const pieceL = new Piece(pieces[4], 'yellow', 'l')
+const pieceS = new Piece(pieces[5], 'purple', 's')
+const pieceB = new Piece(pieces[6], 'grey', 'b')
+const pieceRectangle = new Piece(pieces[7], 'pink', 'rectangle')
 
 export {
   pieceT,
