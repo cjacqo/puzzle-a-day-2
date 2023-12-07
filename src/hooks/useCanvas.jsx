@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { pieceT, pieceU } from "../puzzle/pieces"
+import { pieceB, pieceCorner, pieceL, pieceRectangle, pieceS, pieceT, pieceU, pieceZ } from "../puzzle/pieces"
 
 const useCanvas = draw => {
   const canvasRef = useRef()
@@ -10,10 +10,14 @@ const useCanvas = draw => {
     let count = 0
     let animationId
 
-    pieceT.drawOnCanvas(ctx)
-    pieceU.drawOnCanvas(ctx)
-    ctx.moveTo(100, 100)
-
+    pieceT.drawOnCanvas(ctx, 1, 0)
+    pieceU.drawOnCanvas(ctx, 1, 70)
+    pieceZ.drawOnCanvas(ctx, 1, 170)
+    pieceCorner.drawOnCanvas(ctx, 1, 270)
+    pieceL.drawOnCanvas(ctx, 1, 370)
+    pieceS.drawOnCanvas(ctx, 1, 470)
+    pieceB.drawOnCanvas(ctx, 1, 570)
+    pieceRectangle.drawOnCanvas(ctx, 1, 670)
 
     // draw(ctx, count)
 

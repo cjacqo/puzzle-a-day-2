@@ -107,14 +107,18 @@ class Piece {
   }
 
   // Method: Draw on Canvas
-  drawOnCanvas(ctx) {
+  drawOnCanvas(ctx, xCoord, yCoord) {
     const tileSize = 30
+    ctx.beginPath()
     for (let x = 0; x < this.piece.length; x++) {
       for (let y = 0; y < this.piece[x].length; y++) {
         ctx.fillStyle = 'red'
-        if (this.piece[x][y] === 1) ctx.fillRect(y * tileSize, x * tileSize, tileSize, tileSize)
+        // if (this.piece[x][y] === 1) ctx.fillRect(y * tileSize, x * tileSize, tileSize, tileSize)
+        if (this.piece[x][y] === 1) ctx.rect((y * tileSize) + yCoord, (x * tileSize) + xCoord, tileSize, tileSize)
       }
     }
+    ctx.moveTo(xCoord, yCoord)
+    ctx.stroke()
   }
 
   // Method: Rotate Piece Forward
