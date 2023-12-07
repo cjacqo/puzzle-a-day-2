@@ -1,7 +1,5 @@
 import './App.css'
 import { useEffect, useRef } from 'react'
-import * as THREE from 'three'
-import { pieceT, pieceZ, pieceU, pieceCorner, pieceL, pieceS, pieceB, pieceRectangle } from './puzzle/pieces'
 import Canvas from './components/canvas/Canvas'
 import Pieces from './components/pieces/Pieces'
 
