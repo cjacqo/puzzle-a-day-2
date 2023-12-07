@@ -1,3 +1,5 @@
+import * as THREE from 'three'
+
 // Tetrominoe Pieces
 const pieces = [
   [                                     // Broken t
@@ -81,10 +83,34 @@ class Piece {
     return arr
   }
 
+  // Method: Draw Three JS
+  drawThree() {
+    const shape = []
+    console.log(this.piece)
+    for (let x = 0; x < this.piece.length; x++) {
+      const innerArr = []
+      for (let y = 0; y < this.piece[x].length; y++) {
+        const isFilled = this.piece[x][y] === 1
+        if (isFilled) {
+          const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+          const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+          const cube = new THREE.Mesh(geometry, material)
+          cube.position.x = x
+          cube.position.y = y
+          innerArr.push(cube)
+        }
+      }
+      shape.push(innerArr)
+    }
+    console.log(shape)
+    return shape
+  }
+
   // Method: Rotate Piece Forward
   rotatePieceForward() {
     this.currentRotation =(this._currentRotation + 1) % 4
     this.currentPiece = this.drawPiece()
+    return this
   }
 
   // Method: Rotate Piece Backward
@@ -92,12 +118,14 @@ class Piece {
     this.currentRotation = this._currentRotation - 1
     if (this._currentRotation < 0) this._currentRotation = 3
     this.currentPiece = this.drawPiece()
+    return this
   }
 
   // Method: Flip Piece
   flipPiece() {
     this.currentFlip = (this._currentFlip + 1) % 2
     this.currentPiece = this.drawPiece()
+    return this
   }
 }
 
