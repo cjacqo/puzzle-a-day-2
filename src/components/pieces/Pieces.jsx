@@ -1,24 +1,44 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from "react"
-import { tetrominoeB, tetrominoeC, tetrominoeL, tetrominoeO, tetrominoeS, tetrominoeT, tetrominoeU, tetrominoeZ } from '../../puzzle/pieces'
+import './styles.css'
+import { useDrag } from 'react-dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight, faRotateLeft, faRepeat } from '@fortawesome/free-solid-svg-icons'
-import './styles.css'
+import ItemTypes from './ItemTypes'
 
-const Piece = ({ piece, handleClick, selectedPiece }) => {
-  const size = '50px'
+const pieceStyle = {
+  width: '50px',
+  height: '50px'
+}
 
+const Piece = ({ id, piece, handleClick, selectedPiece }) => {
   const pieceRef = useRef()
 
   const [currentPiece, setCurrentPiece] = useState(piece.shape)
+  const [currentPosition, setCurrentPosition] = useState()
 
   const isSelected = selectedPiece === piece.id
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "div",
+    item: { id: id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging()
+    })
+  }))
 
   useEffect(() => {
     dragElement(pieceRef.current)
   }, [])
 
+  useEffect(() => {
+    console.log(currentPosition)
+  }, [currentPosition])
 
+  function updateCurrentPosition() {
+    const rect = pieceRef.current.getBoundingClientRect()
+    setCurrentPosition(rect.x)
+  }
 
   function dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
@@ -56,6 +76,8 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
       // Stop moving when mouse is released
       document.onmouseup = null
       document.onmousemove = null
+
+      updateCurrentPosition()
     }
   }
 
@@ -79,7 +101,11 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
   }
 
   return (
-    <div className={`piece ${isSelected && 'selected'}`} id={piece.id} ref={pieceRef} onClick={onClick}>
+    <div
+      className={`piece ${isSelected && 'selected'}`}
+      id={piece.id}
+      ref={pieceRef}
+      onClick={onClick}>
       {
         currentPiece.map((r, x) => {
           return (
@@ -91,8 +117,7 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
                       <div
                         key={`${x}-${y}`}
                         style={{
-                          width: size,
-                          height: size,
+                          ...pieceStyle,
                           backgroundColor: piece.color
                       }} />
                     )
@@ -100,10 +125,7 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
                     return (
                       <div
                         key={`${x}-${y}`}
-                        style={{
-                          width: size,
-                          height: size
-                      }} />
+                        style={{...pieceStyle}} />
                     )
                   }
                 })
@@ -126,6 +148,7 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
 }
 
 Piece.propTypes = {
+  id: PropTypes.number.isRequired,
   piece: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired,
   selectedPiece: PropTypes.any.isRequired
@@ -137,7 +160,6 @@ const Pieces = () => {
   const handleClick = (e, id) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log(e.target.parentElement.parentElement)
     setSelectedPiece(id)
   }
 
@@ -146,20 +168,18 @@ const Pieces = () => {
     setSelectedPiece(false)
   })
 
-  useEffect(() => {
-    console.log(selectedPiece)
-  }, [selectedPiece])
-
   return (
     <div className="pieces-container">
-      <Piece piece={tetrominoeT} handleClick={handleClick} selectedPiece={selectedPiece} />
-      {/* <Piece piece={tetrominoeZ} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeU} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeC} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeL} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeS} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeB} handleClick={handleClick} selectedPiece={selectedPiece} />
-      <Piece piece={tetrominoeO} handleClick={handleClick} selectedPiece={selectedPiece} /> */}
+      {
+        ItemTypes.map(item => (
+          <Piece
+            key={item.id}
+            id={item.id}
+            piece={item.piece}
+            handleClick={handleClick}
+            selectedPiece={selectedPiece} />
+        ))
+      }
     </div>
   )
 }
