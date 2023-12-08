@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight, faRotateLeft, faRepeat } from '@fortawesome/free-solid-svg-icons'
 import ItemTypes from './ItemTypes'
 
+const pieceSize = 100
+
 const pieceStyle = {
-  width: '50px',
-  height: '50px'
+  width: pieceSize + 'px',
+  height: pieceSize + 'px'
 }
 
 const Piece = ({ id, piece, handleClick, selectedPiece }) => {

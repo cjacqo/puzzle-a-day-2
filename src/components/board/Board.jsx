@@ -4,10 +4,16 @@ import { useDrop } from 'react-dnd'
 import ItemTypes from '../pieces/ItemTypes'
 import './styles.css'
 
+const squareSize = 100
+
 const squareStyle = {
-  width: '50px',
-  height: '50px',
-  outline: '1px solid black'
+  width: squareSize + 'px',
+  height: squareSize + 'px',
+  border: '1px solid black',
+  margin: '-1px 0 0 -1px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
 }
 
 const Square = ({ text }) => {
