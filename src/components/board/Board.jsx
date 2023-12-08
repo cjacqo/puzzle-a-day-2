@@ -25,10 +25,6 @@ const Square = ({ text }) => {
     setX(rect.x)
   }, [])
 
-  useEffect(() => {
-    console.log(x)
-  }, [x])
-  
   return (
     <div style={{...squareStyle}} ref={squareRef}>
       {text}
@@ -51,8 +47,13 @@ const Board = () => {
     })
   }))
 
+  useEffect(() => {
+    console.log(board)
+  }, [board])
+
   const addPieceToBoard = (id) => {
     const items = ItemTypes.filter((item) => item.id === id)
+    console.log(id)
     setBoard((board) => [...board, items[0]])
   }
 
