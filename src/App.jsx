@@ -10,8 +10,9 @@ function App() {
       <div className="heading-container">
         <h1>Puzzle a Day</h1>
       </div>
-      <Board />
-      <Pieces />
+      <Board>
+        <Pieces />
+      </Board>
     </DndProvider>
   )
 }

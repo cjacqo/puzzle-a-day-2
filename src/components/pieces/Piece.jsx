@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { useRef, useState, useEffect } from 'react'
-import { useDrag } from 'react-dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight, faRotateLeft, faRepeat } from '@fortawesome/free-solid-svg-icons'
 
@@ -15,30 +14,13 @@ const Piece = ({ id, piece, handleClick, selectedPiece }) => {
   const pieceRef = useRef()
 
   const [currentPiece, setCurrentPiece] = useState(piece.shape)
-  const [currentPosition, setCurrentPosition] = useState()
+  const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 })
 
   const isSelected = selectedPiece === piece.id
-
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "div",
-    item: { id: id },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging()
-    })
-  }))
 
   useEffect(() => {
     dragElement(pieceRef.current)
   }, [])
-
-  useEffect(() => {
-    console.log(currentPosition)
-  }, [currentPosition])
-
-  function updateCurrentPosition() {
-    const rect = pieceRef.current.getBoundingClientRect()
-    setCurrentPosition(rect.x)
-  }
 
   function dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
@@ -77,7 +59,11 @@ const Piece = ({ id, piece, handleClick, selectedPiece }) => {
       document.onmouseup = null
       document.onmousemove = null
 
-      updateCurrentPosition()
+      console.log(element)
+
+      const newPositionX = Math.round(element.offsetLeft / 100) * 100
+      const newPositionY = Math.round(element.offsetTop / 100) * 100
+      setCurrentPosition({ x: newPositionX, y: newPositionY })
     }
   }
 
@@ -105,7 +91,8 @@ const Piece = ({ id, piece, handleClick, selectedPiece }) => {
       className={`piece ${isSelected && 'selected'}`}
       id={piece.id}
       ref={pieceRef}
-      onClick={onClick}>
+      onClick={onClick}
+      style={{ left: currentPosition.x, top: currentPosition.y }}>
       {
         currentPiece.map((r, x) => {
           return (

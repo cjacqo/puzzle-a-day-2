@@ -26,38 +26,6 @@
   fill: #000;
 }
 
-#t {
-  left: 0;
-}
-
-#z {
-  left: 50px;
-}
-
-#u {
-  left: 100px;
-}
-
-#corner {
-  left: 200px;
-}
-
-#l {
-  left: 270px;
-}
-
-#s {
-  left: 350px;
-}
-
-#b {
-  left: 420px;
-}
-
-#rectangle {
-  left: 480px;
-}
-
 .row {
   display: flex;
 }

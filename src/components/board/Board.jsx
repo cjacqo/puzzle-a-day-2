@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react'
-import { useDrop } from 'react-dnd'
-import ItemTypes from '../pieces/ItemTypes'
+import { useRef } from 'react'
 import './styles.css'
 
 const squareSize = 100
@@ -18,12 +16,6 @@ const squareStyle = {
 
 const Square = ({ text }) => {
   const squareRef = useRef()
-  const [x, setX] = useState()
-
-  useEffect(() => {
-    const rect = squareRef.current.getBoundingClientRect()
-    setX(rect.x)
-  }, [])
 
   return (
     <div style={{...squareStyle}} ref={squareRef}>
@@ -36,29 +28,9 @@ Square.propTypes = {
   text: PropTypes.string.isRequired
 }
 
-const Board = () => {
-  const [board, setBoard] = useState([])
-  
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: 'div',
-    drop: (item) => addPieceToBoard(item.id),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    })
-  }))
-
-  useEffect(() => {
-    console.log(board)
-  }, [board])
-
-  const addPieceToBoard = (id) => {
-    const items = ItemTypes.filter((item) => item.id === id)
-    console.log(id)
-    setBoard((board) => [...board, items[0]])
-  }
-
+const Board = ({ children }) => {
   return (
-    <div className="board-container" ref={drop}>
+    <div className="board-container">
       <div className="board-wrapper">
         <div className="board-row">
           <Square text='Jan' />
@@ -118,8 +90,13 @@ const Board = () => {
           <Square text='31' />
         </div>
       </div>
+      {children}
     </div>
   )
+}
+
+Board.propTypes = {
+  children: PropTypes.any.isRequired
 }
 
 export default Board

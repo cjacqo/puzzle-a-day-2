@@ -1,8 +1,21 @@
 .board-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+.board-wrapper {
+  height: 700px;
 }
 
 .board-row {
-  display: flex;
+  /* display: flex; */
+  /* width: 700px; */
+  display: grid;
+  grid-template-columns: repeat(7, 100px);
+  grid-template-rows: repeat(1, 100px);
+  width: 700px;
+  height: 100px;
 }
