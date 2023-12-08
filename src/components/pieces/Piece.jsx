@@ -10,7 +10,7 @@ const pieceStyle = {
   height: pieceSize + 'px'
 }
 
-const Piece = ({ id, piece, handleClick, selectedPiece }) => {
+const Piece = ({ piece, handleClick, selectedPiece }) => {
   const pieceRef = useRef()
 
   const [currentPiece, setCurrentPiece] = useState(piece.shape)
@@ -135,7 +135,6 @@ const Piece = ({ id, piece, handleClick, selectedPiece }) => {
 }
 
 Piece.propTypes = {
-  id: PropTypes.number.isRequired,
   piece: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired,
   selectedPiece: PropTypes.any.isRequired

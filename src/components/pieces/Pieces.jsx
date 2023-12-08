@@ -23,7 +23,6 @@ const Pieces = () => {
         ItemTypes.map(item => (
           <Piece
             key={item.id}
-            id={item.id}
             piece={item.piece}
             handleClick={handleClick}
             selectedPiece={selectedPiece} />
