@@ -20,6 +20,7 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
 
   useEffect(() => {
     dragElement(pieceRef.current)
+    setCurrentPosition({ x: piece.startingPosition.x, y: piece.startingPosition.y })
   }, [])
 
   function dragElement(element) {

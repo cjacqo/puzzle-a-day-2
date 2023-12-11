@@ -112,12 +112,13 @@ const shapes = [
   ]
 ]
 
-function Tetrominoe(shapes, color, id) {
+function Tetrominoe(shapes, color, id, x, y) {
   this.shapes = shapes
   this.color = color
   this.id = id
   this.currentFlip = 0
   this.currentRotation = 0
+  this.startingPosition = { x, y }
 
   this.flip = function() {
     this.currentFlip = (this.currentFlip + 1) % 2
@@ -166,14 +167,14 @@ Object.defineProperty(Tetrominoe.prototype, 'shape', {
   }
 })
 
-const tetrominoeT = new Tetrominoe(shapes[0], 'red', 't')
-const tetrominoeZ = new Tetrominoe(shapes[1], 'blue', 'z')
-const tetrominoeU = new Tetrominoe(shapes[2], 'green', 'u')
-const tetrominoeC = new Tetrominoe(shapes[3], 'orange', 'c')
-const tetrominoeL = new Tetrominoe(shapes[4], 'yellow', 'l')
-const tetrominoeS = new Tetrominoe(shapes[5], 'purple', 's')
-const tetrominoeB = new Tetrominoe(shapes[6], 'grey', 'b')
-const tetrominoeO = new Tetrominoe(shapes[7], 'pink', 'o')
+const tetrominoeT = new Tetrominoe(shapes[0], 'red', 't', 0, -500)
+const tetrominoeZ = new Tetrominoe(shapes[1], 'blue', 'z', 0, -50)
+const tetrominoeU = new Tetrominoe(shapes[2], 'green', 'u', 250, 50)
+const tetrominoeC = new Tetrominoe(shapes[3], 'orange', 'c', 600, 50)
+const tetrominoeL = new Tetrominoe(shapes[4], 'yellow', 'l', 950, 50)
+const tetrominoeS = new Tetrominoe(shapes[5], 'purple', 's', 1200, 50)
+const tetrominoeB = new Tetrominoe(shapes[6], 'grey', 'b', 1200, -350)
+const tetrominoeO = new Tetrominoe(shapes[7], 'pink', 'o', 1200, -600)
 
 export {
   tetrominoeT,
