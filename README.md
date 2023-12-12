@@ -15,3 +15,5 @@ This is a simple puzzle game with, "365+ challenges for everyday of the year." I
 
 3. Still in the project folder, run the following command
 `npm run dev`
+
+Or, [view live site]('https://cjacqo.github.io/puzzle-a-day-2/')
