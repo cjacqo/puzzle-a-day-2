@@ -62,7 +62,7 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
 
       console.log(element)
 
-      const newPositionX = Math.round(element.offsetLeft / 100) * 100
+      const newPositionX = (Math.round(element.offsetLeft / 100) * 100) - 10
       const newPositionY = Math.round(element.offsetTop / 100) * 100
       setCurrentPosition({ x: newPositionX, y: newPositionY })
     }
@@ -92,18 +92,19 @@ const Piece = ({ piece, handleClick, selectedPiece }) => {
       className={`piece ${isSelected && 'selected'}`}
       id={piece.id}
       ref={pieceRef}
-      onClick={onClick}
       style={{ left: currentPosition.x, top: currentPosition.y }}>
       {
         currentPiece.map((r, x) => {
           return (
-            <div key={x} className='row'>
+          <div key={x} className='row'>
               {
                 r.map((c, y) => {
                   if (c === 1) {
                     return (
                       <div
                         key={`${x}-${y}`}
+                        className='filled'
+                        onClick={onClick}
                         style={{
                           ...pieceStyle,
                           backgroundColor: piece.color

@@ -20,6 +20,7 @@
   flex-direction: column;
   gap: 1rem;
   background-color: #fff;
+  z-index: 10;
 }
 
 .controls svg path {
@@ -28,4 +29,45 @@
 
 .row {
   display: flex;
+}
+
+#t .row .filled {
+  background: #e00000;
+  box-shadow: inset -17px -17px 34px #cc0000,
+              inset 17px 17px 34px #f40000;
+}
+
+#z .row .filled {
+  box-shadow: inset -17px -17px 34px #0014cc,
+              inset 17px 17px 34px #0018f4;
+}
+
+#u .row .filled {
+  box-shadow: inset -17px -17px 34px #00e800,
+              inset 17px 17px 34px #00ff00;
+}
+
+#c .row .filled {
+  box-shadow: inset -17px -17px 34px #e89600,
+              inset 17px 17px 34px #ffb400;
+}
+
+#l .row .filled {
+  box-shadow: inset -17px -17px 34px #e8e800,
+              inset 17px 17px 34px #ffff00;
+}
+
+#s .row .filled {
+  box-shadow: inset -17px -17px 34px #740074,
+              inset 17px 17px 34px #8c008c;
+}
+
+#b .row .filled {
+  box-shadow: inset -17px -17px 34px #747474,
+              inset 17px 17px 34px #8c8c8c;
+}
+
+#o .row .filled {
+  box-shadow: inset -17px -17px 34px #e8afb9,
+              inset 17px 17px 34px #ffd1dd;
 }
